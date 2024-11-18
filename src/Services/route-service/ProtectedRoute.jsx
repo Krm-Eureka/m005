@@ -13,7 +13,6 @@ const ProtectedRoute = ({ requiredRoles }) => {
   if (token && requiredRoles && !requiredRoles.includes(userRole)) {
     return <Navigate to="/auth/Unauthorized" />;
   }
-
   return <Outlet />;
 };
 

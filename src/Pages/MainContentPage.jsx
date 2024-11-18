@@ -172,35 +172,25 @@ const MainPage = () => {
                 </div>
               </div>
             </div> */}
-            <table className="w-full table-auto border-collapse border border-gray-400">
+            <table className="w-full table-auto border-collapse ">
               <thead>
-                <tr className="bg-gray-500 text-white">
-                  <th className="border border-gray-400 px-4 py-2">#</th>
-                  <th className="border border-gray-400 px-4 py-2">Date</th>
-                  <th className="border border-gray-400 px-4 py-2">Time</th>
-                  <th className="border border-gray-400 px-4 py-2">
-                    Total Judgement
-                  </th>
-                  <th className="border border-gray-400 px-4 py-2">
-                    Part Number
-                  </th>
-                  <th className="border border-gray-400 px-4 py-2">Load(N)</th>
-                  <th className="border border-gray-400 px-4 py-2">
-                    LoadJudgement
-                  </th>
-                  <th className="border border-gray-400 px-4 py-2">
-                    Distance(mm)
-                  </th>
-                  <th className="border border-gray-400 px-4 py-2">
-                    DistanceJudgement
-                  </th>
+                <tr className="bg-white text-black">
+                  <th className=" px-4 py-2">#</th>
+                  <th className=" px-4 py-2">Date</th>
+                  <th className=" px-4 py-2">Time</th>
+                  <th className=" px-4 py-2">Total Judgement</th>
+                  <th className=" px-4 py-2">Part Number</th>
+                  <th className=" px-4 py-2">Load(N)</th>
+                  <th className=" px-4 py-2">LoadJudgement</th>
+                  <th className=" px-4 py-2">Distance(mm)</th>
+                  <th className=" px-4 py-2">DistanceJudgement</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item, index) => (
                   <tr
                     key={item.partNo}
-                    className="odd:bg-white even:bg-gray-200"
+                    className="odd:bg-white even:bg-gray-100"
                   >
                     <td className="border border-gray-400 px-4 py-2">
                       {index + 1}
