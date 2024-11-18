@@ -47,15 +47,15 @@ const HeaderLayout = (props) => {
       <div className="z-50 flex flex-col top-0 sticky dark:text-gray-700 bg-white shadow-md max-w-screen">
         <div className="flex justify-between items-center">
           <div className="l flex flew-row items-center">
-            <div className="logo">
+            <div className="logo ">
               <img
-                className="object-contain justify-center p-0 my-2 h-20 w-50"
+                className="object-contain justify-center p-0 my-2 h-20 w-50 "
                 src={ValeoLogo}
                 alt="Valeo_Logo_VCDA-M006"
               />
             </div>
             <button
-              className="text-gray-800 mx-2 p-2 dark:text-gray-700"
+              className="text-gray-800 mx-2 p-2 dark:text-gray-700 hover:bg-gray-300 rounded-lg"
               onClick={toggleNav}
             >
               <img
