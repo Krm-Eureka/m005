@@ -1,7 +1,7 @@
 {
   "name": "m005",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,14 +15,18 @@
     "@mui/material": "^6.1.7",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
+    "daisyui": "^4.12.14",
     "dotenv": "^16.4.5",
     "font-awesome": "^4.7.0",
+    "framer-motion": "^11.11.17",
     "postcss": "^8.4.49",
     "primereact": "^10.8.4",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
     "react-sticky-el": "^2.1.1",
+    "styled-components": "^6.1.13",
     "sweetalert2": "^11.14.5",
     "tailwindcss": "^3.4.15",
     "xlsx": "^0.18.5"
