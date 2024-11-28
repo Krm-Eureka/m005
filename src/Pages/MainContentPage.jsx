@@ -308,7 +308,7 @@ const MainPage = () => {
   // };
 
   return (
-    <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-full h-fit">
+    <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
       <div className="title bg-green-500 p-2 rounded-t-md font-bold">
         <p>EOLT Station : AUTO Mode</p>
       </div>
@@ -317,8 +317,8 @@ const MainPage = () => {
         data.map((i, idx) => (
           <div key={idx} className="container">
             <div className="content px-6 py-6 items-center">
-              <div>
-                <p className="font-bold text-2xl">
+              <div className="mb-2">
+                <p className="font-bold text-2xl mb-2">
                   PartNumber :{" "}
                   <span className="text-white">{i?.partNumber}</span>
                 </p>
