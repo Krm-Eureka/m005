@@ -149,11 +149,8 @@ const MainPage = () => {
     // },
   ];
   useEffect(() => {
-    // data.length <= 0 ? setLoading(false) : setLoading(true);
     const interval = setInterval(() => {
       setData(initialData);
-      data.length <= 0 ? setLoading(true) : setLoading(false);
-      console.log("Current Data:", data);
       setData((prevData) => {
         return prevData.map((i) => ({
           ...i,
@@ -170,10 +167,17 @@ const MainPage = () => {
     }, 1000);
 
     return () => clearInterval(interval);
+  }, [initialData]);
 
-    
-  }, []);
-console.log(loading);
+  useEffect(() => {
+    if (data.length <= 0) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [data]);
+
+  console.log(loading);
 
   // const TestClick = () => {
   //   setData([
