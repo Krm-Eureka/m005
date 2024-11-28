@@ -6,6 +6,7 @@ import UnauthorizedPage from "./Pages/UnauthorizedPage";
 import ErrorPage from './Pages/ErrorPage';
 import MainPage from './Pages/MainContentPage';
 import LoginPage from './Pages/LoginPage';
+import DataReport from './Pages/ReportDataPage';
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route
           path="/Console/MainPage"
           element={<MainPage/>}
+        />
+        <Route
+          path="/Console/DataReport"
+          element={<DataReport/>}
         />
       {/* </Route> */}
     </Routes>
