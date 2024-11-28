@@ -170,7 +170,10 @@ const MainPage = () => {
     }, 1000);
 
     return () => clearInterval(interval);
+
+    
   }, []);
+console.log(loading);
 
   // const TestClick = () => {
   //   setData([
