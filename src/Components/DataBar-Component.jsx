@@ -10,12 +10,14 @@ const DataBar = ({
 }) => {
   const isError =
     value === "NONE" ||
-    value === "Unknown" ||
     value === "Invalid Date" ||
     // value.trim() === "" ||
     value === "NOK";
   const isWarning =
-    value === "No_Data" || value === undefined || value === null;
+    value === "Unknown" ||
+    value === "No_Data" ||
+    value === undefined ||
+    value === null;
   const isSuccess = !isError && !isWarning;
 
   return (
@@ -36,7 +38,6 @@ const DataBar = ({
             : value
         }
         className={`cursor-${cursor} w-${wth} p-1.5 bg-gray-50 ${
-            
           isSuccess
             ? `bg-green-100 border-green-200`
             : isWarning

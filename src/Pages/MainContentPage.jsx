@@ -149,10 +149,10 @@ const MainPage = () => {
     // },
   ];
   useEffect(() => {
-    setData(initialData);
     // data.length <= 0 ? setLoading(false) : setLoading(true);
     const interval = setInterval(() => {
-      data.length <= 0 ? setLoading(false) : setLoading(true);
+      setData(initialData);
+      data.length <= 0 ? setLoading(true) : setLoading(false);
       console.log("Current Data:", data);
       setData((prevData) => {
         return prevData.map((i) => ({
@@ -163,10 +163,11 @@ const MainPage = () => {
           load: i.load + Math.random(),
           distance: i.distance + Math.random(),
           loadJudgeMent: Math.floor(Math.random() * 4),
-          distanceJudgeMent: Math.floor(Math.random() * 4)
+          distanceJudgeMent: Math.floor(Math.random() * 4),
+          totalJudgeMent: Math.floor(Math.random() * 4),
         }));
       });
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -318,32 +319,39 @@ const MainPage = () => {
             <div className="content px-6 py-6 items-center">
               <div>
                 <p className="font-bold text-2xl">
-                  PartNumber : {i?.partNumber}
+                  PartNumber :{" "}
+                  <span className="text-white">{i?.partNumber}</span>
                 </p>
                 <div className="search-card flex flex-between flex-wrap">
-                  <DataBar title="Date" type="text" value={i?.date} />
-                  <DataBar title="Time" type="text" value={i?.time} />
+                  <DataBar title="Date" type="text" value={i?.date} /> disable=
+                  {true}
+                  <DataBar title="Time" type="text" value={i?.time} /> disable=
+                  {true}
                 </div>
                 <div className="search-card flex flex-between flex-wrap">
                   <DataBar
                     title="Load (N)"
                     type="text"
                     value={i?.load.toFixed(2)}
+                    disable={true}
                   />
                   <DataBar
                     title="Load JudgeMent"
                     type="text"
                     value={getJudgementText(i?.loadJudgeMent)}
+                    disable={true}
                   />
                   <DataBar
                     title="Distance (mm)"
                     type="text"
-                    value={i?.distance.toFixed(2)}
+                    value={i?.distance.toFixed(3)}
+                    disable={true}
                   />
                   <DataBar
                     title="Distance JudgeMent"
                     type="text"
                     value={getJudgementText(i?.distanceJudgeMent)}
+                    disable={true}
                   />
                 </div>
                 <div className="search-card flex flex-between flex-wrap">
@@ -351,6 +359,7 @@ const MainPage = () => {
                     title="Total JudgeMent"
                     type="text"
                     value={getJudgementText(i?.totalJudgeMent)}
+                    disable={true}
                   />
                 </div>
               </div>
