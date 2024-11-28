@@ -323,10 +323,18 @@ const MainPage = () => {
                   <span className="text-white">{i?.partNumber}</span>
                 </p>
                 <div className="search-card flex flex-between flex-wrap">
-                  <DataBar title="Date" type="text" value={i?.date} /> disable=
-                  {true}
-                  <DataBar title="Time" type="text" value={i?.time} /> disable=
-                  {true}
+                  <DataBar
+                    title="Date"
+                    type="text"
+                    value={i?.date}
+                    disable={true}
+                  />
+                  <DataBar
+                    title="Time"
+                    type="text"
+                    value={i?.time}
+                    disable={true}
+                  />
                 </div>
                 <div className="search-card flex flex-between flex-wrap">
                   <DataBar
