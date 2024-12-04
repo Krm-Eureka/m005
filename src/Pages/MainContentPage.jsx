@@ -120,6 +120,13 @@ const MainPage = () => {
                       value={i?.productionTimeDesc}
                       disable={true}
                     />
+                    <DataBar
+                      title="JIG"
+                      // title="Time"
+                      type="text"
+                      value={i?.jigDesc === 'jig1'? '1' : i?.jigDesc === 'jig2' ? '2' : 'invalid_Data'}
+                      disable={true}
+                    />
                   </div>
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar

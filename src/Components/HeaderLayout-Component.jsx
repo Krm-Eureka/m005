@@ -152,7 +152,8 @@ const HeaderLayout = (props) => {
                 <div className="items-center px-2">
                   <i className="text-xl fa-solid fa-folder-tree"></i>
                   {/* <span className="ml-2">Data Report</span> */}
-                  <span className="ml-2">Reportes</span>
+                  <span className="ml-2">Reporte de datos
+                  </span>
                 </div>
               </Link>
               {/* <Link

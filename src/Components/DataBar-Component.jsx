@@ -9,11 +9,15 @@ const DataBar = ({
   disable = false,
 }) => {
   const isError =
+    value === "jig1" ||
+    value === "jig2" ||
     value === "NONE" ||
     value === "Invalid Date" ||
     // value.trim() === "" ||
     value === "NOK";
   const isWarning =
+    value !== "jig1" ||
+    value !== "jig2" ||
     value === "Unknown" ||
     value === "No_Data" ||
     value === undefined ||
