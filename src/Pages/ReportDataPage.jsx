@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 // import { useEffect } from "react";
 import Table from "@mui/material/Table";
@@ -9,7 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-// import traceabilityService from "../../services/api-service/traceabilityReportData";
+import traceabilityService from "../Services/data-service/TraceabilityData";
 import { formatDateTimeSlash } from "../Services/timeStamp-Service";
 import { TableSortLabel } from "@mui/material";
 import HeaderLayout from "../Components/HeaderLayout-Component";
@@ -32,218 +32,83 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const columns =[{
-  id: "date",
-  label: "Date",
-  sortable: true,
-  aln: "center",
-},
-{
-  id: "time",
-  label: "Time",
-  sortable: true,
-  aln: "center",
-},
-{
-  id: "partNumber",
-  label: "Part Number",
-  sortable: true,
-  w: 340,
-  aln: "center",
-},
-{
-  id: "totalJudgeMent",
-  label: "Total Jud",
-  w: 200,
-  sortable: true,
-  aln: "center",
-},
-{
-  id: "load",
-  label: "Load",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "loadJudgeMent",
-  label: "Load Jud",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "distance",
-  label: "Distance",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "distanceJudgeMent",
-  label: "Distance Jud",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "logRequest",
-  label: "Log Request",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "systemClock",
-  label: "System Clock",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},
-{
-  id: "lockAcknowladge",
-  label: "Lock Acknowladge",
-  sortable: true,
-  w: 200,
-  aln: "center",
-},]
-// const columns = [
-//   {
-//     id: "id",
-//     label: "Serial No",
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "modelType",
-//     label: "Model",
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "lastUpdateDate",
-//     label: "Date & Time",
-//     w: 250,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "totalJudgement",
-//     label: "Total Jud",
-//     w: 200,
-//     aln: "center",
-//     sortable: true,
-//   },
-
-//   {
-//     id: "partNumber",
-//     label: "Part Number",
-//     sortable: true,
-//     w: 340,
-//     aln: "center",
-//   },
-//   {
-//     id: "qrCode",
-//     label: "Qr Code",
-//     sortable: true,
-//     w: 340,
-//     aln: "center",
-//   },
-//   {
-//     id: "qrJudgement",
-//     label: "Qr Code Jud",
-//     w: 200,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "currentMin",
-//     label: "Current Min(mA)",
-//     sortable: true,
-//     w: 180,
-//     aln: "center",
-//   },
-//   {
-//     id: "currentMax",
-//     label: "Current Max(mA)",
-//     sortable: true,
-//     w: 180,
-//     aln: "center",
-//   },
-//   {
-//     id: "currentMeasured",
-//     label: "Current Measured(mA)",
-//     w: 250,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "currentJud",
-//     label: "Current Jud",
-//     sortable: true,
-//     w: 200,
-//     aln: "center",
-//   },
-//   {
-//     id: "sensitivityMin",
-//     label: "Sensitivity Min(dBV/Pa)",
-//     w: 250,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "sensitivityMax",
-//     label: "Sensitivity Max(dBV/Pa)",
-//     w: 250,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "sensitivityResult",
-//     label: "Sensitivity Measured(dBV/Pa)",
-//     w: 250,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "sensitivityJud",
-//     label: "Sensitivity Jud",
-//     w: 200,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   { id: "thdMin", label: "THD Min(%)", sortable: true, w: 150, aln: "center" },
-//   { id: "thdMax", label: "THD Max(%)", sortable: true, w: 150, aln: "center" },
-//   {
-//     id: "thdResult",
-//     label: "THD Measured(%)",
-//     sortable: true,
-//     w: 200,
-//     aln: "center",
-//   },
-//   { id: "thdJud", label: "THD Jud", sortable: true, w: 200, aln: "center" },
-//   {
-//     id: "frequencyJud",
-//     label: "Frequency Jud",
-//     w: 200,
-//     sortable: true,
-//     aln: "center",
-//   },
-//   {
-//     id: "newSerialCode",
-//     label: "QRCodeScanner",
-//     sortable: true,
-//     w: 340,
-//     aln: "center",
-//   },
-//   {
-//     id: "reTestFlag",
-//     label: "ProductionMode",
-//     w: 200,
-//     sortable: true,
-//     aln: "center",
-//   },
-// ];
+const columns = [
+  {
+    id: "date",
+    label: "Date",
+    sortable: true,
+    aln: "center",
+  },
+  {
+    id: "time",
+    label: "Time",
+    sortable: true,
+    aln: "center",
+  },
+  {
+    id: "partNumber",
+    label: "Part Number",
+    sortable: true,
+    w: 340,
+    aln: "center",
+  },
+  {
+    id: "totalJudgeMent",
+    label: "Total Jud",
+    w: 200,
+    sortable: true,
+    aln: "center",
+  },
+  {
+    id: "load",
+    label: "Load",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "loadJudgeMent",
+    label: "Load Jud",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "distance",
+    label: "Distance",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "distanceJudgeMent",
+    label: "Distance Jud",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "logRequest",
+    label: "Log Request",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "systemClock",
+    label: "System Clock",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+  {
+    id: "lockAcknowladge",
+    label: "Lock Acknowladge",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+];
 const DataReport = () => {
   const today = new Date().toISOString().split("T")[0];
   const [page, setPage] = useState(0);
@@ -268,6 +133,7 @@ const DataReport = () => {
   const [error, setError] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropDown, setDropDown] = useState("");
+  const inputRef = useRef(null);
 
   const toggleDropdown = () => {
     console.log(dropDown);
@@ -340,141 +206,48 @@ const DataReport = () => {
     setToDate(Format);
   };
 
-  const handleClear = () => {
-    setRows([
-      // {
-      //   id: 1,
-      //   modelType: "Status 1",
-      //   lastUpdateDate: "2024-10-25 12:00",
-      //   totalJudgement: 1,
-      //   serialCode: "LM-12345",
-      //   qrCode: "QR-54321",
-      //   qrJudgement: 1,
-      //   currentMin: 1.2,
-      //   currentMax: 2.3,
-      //   currentMeasured: 1.9,
-      //   currentJud: 1,
-      //   sensitivityMin: -45,
-      //   sensitivityMax: -30,
-      //   sensitivityResult: -35,
-      //   sensitivityJud: 1,
-      //   thdMin: 0.5,
-      //   thdMax: 1.2,
-      //   thdResult: 0.9,
-      //   thdJud: 1,
-      //   frequencyJud: 1,
-      //   reTestFlag: true,
-      //   newSerialCode: "1231213213213213213212132",
-      // },
-      // {
-      //   id: 2,
-      //   modelType: "Status 2",
-      //   lastUpdateDate: "2024-10-25 12:05",
-      //   totalJudgement: 2,
-      //   serialCode: "LM-12346",
-      //   qrCode: "QR-54322",
-      //   qrJudgement: 2,
-      //   currentMin: 1.1,
-      //   currentMax: 2.5,
-      //   currentMeasured: 2.6,
-      //   currentJud: 2,
-      //   sensitivityMin: -42,
-      //   sensitivityMax: -28,
-      //   sensitivityResult: -30,
-      //   sensitivityJud: 2,
-      //   thdMin: 0.6,
-      //   thdMax: 1.3,
-      //   thdResult: 1.1,
-      //   thdJud: 2,
-      //   frequencyJud: 2,
-      //   reTestFlag: true,
-      // },
-      // {
-      //   id: 3,
-      //   modelType: "Status 3",
-      //   lastUpdateDate: "2024-10-25 12:10",
-      //   totalJudgement: 3,
-      //   serialCode: "LM-12347",
-      //   qrCode: "QR-54323",
-      //   qrJudgement: 3,
-      //   currentMin: 1.2,
-      //   currentMax: 2.4,
-      //   currentMeasured: 2.0,
-      //   currentJud: 3,
-      //   sensitivityMin: -47,
-      //   sensitivityMax: -29,
-      //   sensitivityResult: -32,
-      //   sensitivityJud: 3,
-      //   thdMin: 0.4,
-      //   thdMax: 1.0,
-      //   thdResult: 0.8,
-      //   thdJud: 3,
-      //   frequencyJud: 3,
-      //   reTestFlag: true,
-      // },
-      // {
-      //   id: 4,
-      //   modelType: "Status 5",
-      //   lastUpdateDate: "2024-10-25 12:15",
-      //   totalJudgement: 5,
-      //   serialCode: "LM-12348",
-      //   qrCode: "QR-54324",
-      //   qrJudgement: 5,
-      //   currentMin: 1.5,
-      //   currentMax: 2.7,
-      //   currentMeasured: 2.3,
-      //   currentJud: 5,
-      //   sensitivityMin: -40,
-      //   sensitivityMax: -26,
-      //   sensitivityResult: -36,
-      //   sensitivityJud: 5,
-      //   thdMin: 0.7,
-      //   thdMax: 1.4,
-      //   thdResult: 1.3,
-      //   thdJud: 5,
-      //   frequencyJud: 5,
-      //   reTestFlag: false,
-      // },
-      // {
-      //   id: 5,
-      //   modelType: "Status 0",
-      //   lastUpdateDate: "2024-10-25 12:15",
-      //   totalJudgement: 0,
-      //   serialCode: "LM-12348",
-      //   qrCode: "QR-54324",
-      //   qrJudgement: 0,
-      //   currentMin: 1.5,
-      //   currentMax: 2.7,
-      //   currentMeasured: 2.3,
-      //   currentJud: 0,
-      //   sensitivityMin: -40,
-      //   sensitivityMax: -26,
-      //   sensitivityResult: -36,
-      //   sensitivityJud: 0,
-      //   thdMin: 0.7,
-      //   thdMax: 1.4,
-      //   thdResult: 1.3,
-      //   thdJud: 0,
-      //   frequencyJud: 0,
-      //   reTestFlag: false,
-      // },
-    ]);
+  useEffect(() => {
+    if (rows.length > 0) {
+      inputRef.current?.focus();
+    }
+  }, [rows]);
+
+  const handleClear = async () => {
     setSearchTerm("");
+    setSerialNumber("");
+    console.log(searchTerm);
+    console.log(sortedRows);
+    setRows([]);
     setFromDate(fromDate);
     setToDate(toDate);
-  };
-  const searchWithDate = async () => {
     // try {
     //   await traceabilityService.getTraceabilityDataWithDate(
-    //     "1",
+    //     traceabilityService.version,
     //     fromDate,
     //     toDate,
-    //     serialNumber,
     //     setRows
     //   );
+    // if (rows.length !== 0) {
+    //   console.log(rows.length);
+    //   inputRef.current?.focus();
+    // }
+    //   console.log("Filters cleared and data reloaded");
     // } catch (err) {
     //   setError(err);
+    //   console.error("Error reloading data:", err);
     // }
+  };
+  const searchWithDate = async () => {
+    try {
+      await traceabilityService.getTraceabilityDataWithDate(
+        traceabilityService.version,
+        fromDate,
+        toDate,
+        setRows
+      );
+    } catch (err) {
+      setError(err);
+    }
   };
   const handleSearchBySerial = async () => {
     // try {
@@ -483,6 +256,10 @@ const DataReport = () => {
     //     searchTerm,
     //     setRows
     //   );
+    // if (rows.length !== 0) {
+    //   console.log(rows.length);
+    //   inputRef.current?.focus();
+    // }
     // } catch (err) {
     //   setError(err);
     // }
@@ -681,7 +458,7 @@ const DataReport = () => {
                 />
               </svg>
             </button>
-            {dropdownOpen && (
+            {/* {dropdownOpen && (
               <div>
                 <ul className=" py-2 text-sm text-gray-700 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-fit mb-2">
                   <li>
@@ -708,7 +485,7 @@ const DataReport = () => {
                   </li>
                 </ul>
               </div>
-            )}
+            )} */}
           </div>
           <div className="mx-2 mb-2 flex ">
             {rows && rows.length > 0 && dropDown !== "serial" ? (
@@ -721,6 +498,7 @@ const DataReport = () => {
                 </label>
                 <input
                   type="text"
+                  ref={inputRef}
                   id="serialNumber"
                   className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
                   placeholder="Serial Number..."
