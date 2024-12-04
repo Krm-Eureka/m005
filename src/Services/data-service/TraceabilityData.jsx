@@ -22,10 +22,29 @@ const getTraceabilityDataWithDate = (version, start, end, SET) => {
 
   getData();
 };
+const get2LastData = (version,SET) =>{
+    const getData = async () => {
+        const url = `/api/v${version}/TraceabilityLog/Get2LastRecord`;
+        console.log(url);
+        try {
+          const res = await endpoint.get(url);
+          console.log("Get2LastRecord :", res.data);
+          SET(res.data.data);
 
+        } catch (error) {
+          console.error("Failed to fetch Data:", error);
+          if (error.response) {
+            console.error("Error Status:", error.response.status);
+            console.error("Error Data:", error.response.data);
+          }
+        }
+      };
+      getData();
+}
 const traceabilityService = {
   version,
   getTraceabilityDataWithDate,
+  get2LastData
 };
 
 export default traceabilityService;
