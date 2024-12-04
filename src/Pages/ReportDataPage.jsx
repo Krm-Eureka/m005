@@ -357,7 +357,7 @@ const DataReport = () => {
       <HeaderLayout page="Reporte de datos" />
       <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
         <div className="title bg-green-500 p-2 rounded-t-md font-bold">
-          <p>Informe de trazabilidad de : AGS KM-KX END CAP STATION AUTOMATIC</p>
+          <p>AGS KM-KX END CAP STATION AUTOMATIC : Informe de trazabilidad</p>
         </div>
         <div className="flex flex-wrap mx-4 py-2 h-fit items-center justify-center">
           <div className="mx-2 mb-2 flex ">
