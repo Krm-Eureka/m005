@@ -34,109 +34,125 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const columns = [
   {
-    id: "date",
-    label: "Date",
+    id: "id",
+    label: "ID",
     sortable: true,
     aln: "center",
   },
+  // {
+  //   id: "productionDateDesc",
+  //   label: "Fecha",
+  //   sortable: true,
+  //   aln: "center",
+  // },
   {
-    id: "time",
-    label: "Time",
+    id: "productionDate",
+    label: "Fecha y Hora",
     sortable: true,
+    aln: "center",
+  },
+  // {
+  //   id: "productionTimeDesc",
+  //   label: "Hora",
+  //   sortable: true,
+  //   aln: "center",
+  // },
+  {
+    id: "jigDesc",
+    label: "dispositivo de fijación",
+    sortable: true,
+    w: 150,
     aln: "center",
   },
   {
     id: "partNumber",
-    label: "Part Number",
-    sortable: true,
-    w: 340,
-    aln: "center",
-  },
-  {
-    id: "totalJudgeMent",
-    label: "Total Jud",
-    w: 200,
-    sortable: true,
-    aln: "center",
-  },
-  {
-    id: "load",
-    label: "Load",
+    label: "Número de Parte",
     sortable: true,
     w: 200,
     aln: "center",
   },
   {
-    id: "loadJudgeMent",
-    label: "Load Jud",
+    id: "totalJudgementDesc",
+    label: "Juicio Total",
+    w: 150,
+    sortable: true,
+    aln: "center",
+  },
+  {
+    id: "loadValue",
+    label: "Carga (N)",
+    sortable: true,
+    w: 150,
+    aln: "center",
+  },
+  {
+    id: "loadJudgementDesc",
+    label: "Juicio de Carga",
+    sortable: true,
+    w: 150,
+    aln: "center",
+  },
+  {
+    id: "distanceValue",
+    label: "Distancia (mm)",
+    sortable: true,
+    w: 150,
+    aln: "center",
+  },
+  {
+    id: "distanceJudgementDesc",
+    label: "Juicio de Distancia",
+    sortable: true,
+    w: 150,
+    aln: "center",
+  },
+
+  {
+    id: "boxNumber",
+    label: "Número de Caja",
     sortable: true,
     w: 200,
     aln: "center",
   },
   {
-    id: "distance",
-    label: "Distance",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "distanceJudgeMent",
-    label: "Distance Jud",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "logRequest",
-    label: "Log Request",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "systemClock",
-    label: "System Clock",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "lockAcknowladge",
-    label: "Lock Acknowladge",
+    id: "palletNumber",
+    label: "Número de Palet",
     sortable: true,
     w: 200,
     aln: "center",
   },
 ];
 const DataReport = () => {
-  const today = new Date().toISOString().split("T")[0];
+  // const today = new Date().toISOString().split("T")[0];
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("lastUpdateDate");
-
   const [rows, setRows] = useState([]);
   const now = new Date();
   const NOW = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
-    .padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")} `;
-  // ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+    .padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}`;
 
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+  const YESTERDAY = `${yesterday.getFullYear()}-${(yesterday.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${yesterday.getDate().toString().padStart(2, "0")}`;
+  // ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
   const [toDate, setToDate] = useState(NOW);
-  const [fromDate, setFromDate] = useState(today);
-  // const [toDate, setToDate] = useState(today + " 23:59");
+  const [fromDate, setFromDate] = useState(YESTERDAY);
   const [serialNumber, setSerialNumber] = useState("");
   const [error, setError] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropDown, setDropDown] = useState("");
+  // const [dropDown, setDropDown] = useState("");
   const inputRef = useRef(null);
 
-  const toggleDropdown = () => {
-    console.log(dropDown);
-    setDropdownOpen(!dropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   console.log(dropDown);
+  //   setDropdownOpen(!dropdownOpen);
+  // };
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -161,49 +177,53 @@ const DataReport = () => {
     });
   };
 
-  const mapStatus = (value) => {
-    if (value === 2 || value === 3 || value === "FAIL" || value === "FAILED")
-      return "FAIL";
-    if (value === 1 || value === "PASS" || value === "PASSED") return "PASS";
-    if (value === 0 || value !== 1 || value !== 2) return null;
-    return value;
-  };
+  // const mapStatus = (value) => {
+  //   if (value === 2 || value === 3 || value === "FAIL" || value === "FAILED")
+  //     return "FAIL";
+  //   if (value === 1 || value === "PASS" || value === "PASSED") return "PASS";
+  //   if (value === 0 || value !== 1 || value !== 2) return null;
+  //   return value;
+  // };
 
-  const getColor = (value) => {
-    if (value === 0 || value === 1 || value === "FAIL" || value === "FAILED")
-      return "red";
-    if (
-      value === 2 ||
-      value === "PASS" ||
-      value === "PASSED" ||
-      value === false
-    )
-      return "green";
-    if (value === 3 || value === "FAIL" || value === "FAILED" || value === true)
-      return "red";
+  // const getColor = (value) => {
+  //   if (value === 0 || value === 2 || value === "NG") return "red";
+  //   if (value === 1 || value === "OK") return "green";
+  //   return "inherit";
+  // };
 
-    return "inherit";
-  };
+  // const handleSearchChange = (event) => {
+  //   setSearchTerm(event.target.value);
+  //   setSerialNumber(event.target.value);
+  // };
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    setSerialNumber(event.target.value);
+  const formatToCustomAmPm = (isoDate) => {
+    const date = new Date(isoDate);
+
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // Convert 0 (midnight) to 12
+
+    return `${year}-${month}-${day} ${hours}.${minutes} ${ampm}`;
   };
 
   const handleFromDateChange = (event) => {
     const inputValue = event.target.value;
     const Format = inputValue.replace("T", " ");
-    // console.log(Format);
+    console.log(Format);
     setFromDate(Format);
   };
 
   const handleToDateChange = (event) => {
     const inputValue = event.target.value;
     const Format = inputValue.replace("T", " ");
-    // console.log(Format);
+
     setToDate(Format);
   };
-
   useEffect(() => {
     if (rows.length > 0) {
       inputRef.current?.focus();
@@ -211,6 +231,7 @@ const DataReport = () => {
   }, [rows]);
 
   const handleClear = async () => {
+    console.log(sortedRows);
     setSearchTerm("");
     setSerialNumber("");
     console.log(searchTerm);
@@ -218,22 +239,6 @@ const DataReport = () => {
     setRows([]);
     setFromDate(fromDate);
     setToDate(toDate);
-    // try {
-    //   await traceabilityService.getTraceabilityDataWithDate(
-    //     traceabilityService.version,
-    //     fromDate,
-    //     toDate,
-    //     setRows
-    //   );
-    // if (rows.length !== 0) {
-    //   console.log(rows.length);
-    //   inputRef.current?.focus();
-    // }
-    //   console.log("Filters cleared and data reloaded");
-    // } catch (err) {
-    //   setError(err);
-    //   console.error("Error reloading data:", err);
-    // }
   };
   const searchWithDate = async () => {
     try {
@@ -247,47 +252,33 @@ const DataReport = () => {
       setError(err);
     }
   };
-  const handleSearchBySerial = async () => {
-    // try {
-    //   await traceabilityService.getAcousticTraceLogBySerialNo(
-    //     "1",
-    //     searchTerm,
-    //     setRows
-    //   );
-    // if (rows.length !== 0) {
-    //   console.log(rows.length);
-    //   inputRef.current?.focus();
-    // }
-    // } catch (err) {
-    //   setError(err);
-    // }
-  };
   const filteredRows = rows.filter((row) => {
-    const rowDate = new Date(row.lastUpdateDate);
+    const rowDate = new Date(row.productionDate);
     const from = fromDate ? new Date(fromDate) : null;
     const to = toDate ? new Date(toDate) : null;
-    if (from) {
-      from.setHours(0, 0, 0, 0);
-    }
-    if (to) {
-      to.setHours(23, 59, 59, 999);
-    }
-    const isDateInRange = (!from || rowDate >= from) && (!to || rowDate <= to);
+    // const isDateInRange = (!from || rowDate >= from) && (!to || rowDate <= to);
+    const isDateInRange = () => {
+      const rowDateStr = rowDate.toISOString().split("T")[0];
+      const fromStr = from ? from.toISOString().split("T")[0] : null;
+      const toStr = to ? to.toISOString().split("T")[0] : null;
+    
+      return (!fromStr || rowDateStr >= fromStr) && (!toStr || rowDateStr <= toStr);
+    };
     const isSearchMatch =
       searchTerm === "" ||
       Object.values(row).some((value) =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       );
-
+// console.log(isDateInRange);
     const isSerialMatch =
       !serialNumber || row.serialCode.includes(serialNumber);
     return isDateInRange && isSearchMatch && isSerialMatch;
   });
   const sortedRows = sortRows(filteredRows, order, orderBy);
-  const toFixedTwo = (value) => {
-    const numericValue = parseFloat(value);
-    return isNaN(numericValue) ? value : numericValue.toFixed(2);
-  };
+  // console.log(filteredRows);
+  // 
+  // console.log(sortedRows);
+  
   const exportToCSV = () => {
     const headers = columns.map((column) => `"${column.label}"`).join(",");
 
@@ -295,66 +286,9 @@ const DataReport = () => {
       return columns
         .map((column) => {
           let value = row[column.id];
-
-          if (column.id === "lastUpdateDate" || column.id === "creationDate") {
-            value = formatDateTimeSlash(value);
+          if (column.id === "productionDate") {
+            value = formatToCustomAmPm(value);
           }
-          if (column.id === "id") {
-            const extractedCode = row.serialCode
-              ? row.serialCode.split("-").pop()
-              : "N/A";
-
-            const number =
-              extractedCode !== "N/A" ? parseInt(extractedCode, 10) : "N/A";
-
-            return number;
-          }
-
-          if (
-            column.id === "sensitivityResult" ||
-            column.id === "thdResult" ||
-            column.id === "currentMeasured"
-          ) {
-            value = toFixedTwo(value);
-          }
-
-          if (
-            column.id === "totalJudgement" ||
-            column.id === "qrJudgement" ||
-            column.id === "currentJud" ||
-            column.id === "sensitivityJud" ||
-            column.id === "thdJud" ||
-            column.id === "frequencyJud"
-          ) {
-            if (column.id === "qrJudgement") {
-              value =
-                row[column.id] === 1 ||
-                row[column.id] === "PASS" ||
-                row[column.id] === "PASSED"
-                  ? "PASS"
-                  : row[column.id] === 5 ||
-                    row[column.id] === 3 ||
-                    row[column.id] === "FAIL" ||
-                    row[column.id] === "FAILED"
-                  ? "FAIL"
-                  : row[column.id] !== 2 ||
-                    row[column.id] !== 3 ||
-                    row[column.id] !== "FAIL" ||
-                    row[column.id] !== "FAILED"
-                  ? "NA"
-                  : mapStatus(row[column.id]);
-            } else {
-              value = mapStatus(row[column.id]);
-            }
-          }
-          if (column.id === "reTestFlag") {
-            return row[column.id] === false
-              ? "A"
-              : row[column.id] === true
-              ? "R"
-              : "unknown";
-          }
-
           return typeof value === "string"
             ? `"${value.replace(/"/g, '""').replace(/,/g, "\\,")}"`
             : value || "";
@@ -401,9 +335,6 @@ const DataReport = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const handleSerialChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -427,144 +358,60 @@ const DataReport = () => {
           <p>Traceability Report of EOLTStation</p>
         </div>
         <div className="flex flex-wrap mx-4 py-2 h-fit items-center justify-center">
-          <div className="flex flex-col p-0">
-            <button
-              onClick={toggleDropdown}
-              className=" relative w-fit text-white mt-2 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center inline-flex items-center"
-              type="button"
-            >
-              {dropDown === "" || null
-                ? "Filter Options"
-                : dropDown === "date"
-                ? "By Date"
-                : dropDown === "serial"
-                ? "By Serial Code"
-                : "Filter Options"}
-
-              <svg
-                className="w-2.5 h-2.5 ml-4"
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button>
-            {/* {dropdownOpen && (
-              <div>
-                <ul className=" py-2 text-sm text-gray-700 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-fit mb-2">
-                  <li>
-                    <a
-                      className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer"
-                      onClick={() => {
-                        setDropDown("date");
-                        toggleDropdown();
-                      }}
-                    >
-                      By Date
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer"
-                      onClick={() => {
-                        setDropDown("serial");
-                        toggleDropdown();
-                      }}
-                    >
-                      By Serial Code
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            )} */}
-          </div>
           <div className="mx-2 mb-2 flex ">
-            {rows && rows.length > 0 && dropDown !== "serial" ? (
-              <div className="flex-row">
-                <label
-                  htmlFor="serialNumber"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-800"
-                >
-                  Serial Number
-                </label>
-                <input
-                  type="text"
-                  ref={inputRef}
-                  id="serialNumber"
-                  className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
-                  placeholder="Serial Number..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                />
-              </div>
-            ) : (
-              ""
-            )}
+            {rows && rows.length > 0
+              ? ""
+              : // <div className="flex-row">
+                //   <label
+                //     htmlFor="serialNumber"
+                //     className="block text-sm font-medium text-gray-700 dark:text-gray-800"
+                //   >
+                //     Serial Number
+                //   </label>
+                //   <input
+                //     type="text"
+                //     ref={inputRef}
+                //     id="serialNumber"
+                //     className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
+                //     placeholder="Serial Number..."
+                //     value={searchTerm}
+                //     onChange={handleSearchChange}
+                //   />
+                // </div>
+                ""}
             {/* <div className="flex"> */}
-
-            {dropDown === "date" ? (
-              <div className="flex">
-                <div className="mx-2 mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
-                    From Date
-                  </label>
-                  <input
-                    type="date"
-                    // type="datetime-local"
-                    className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
-                    value={fromDate}
-                    onChange={handleFromDateChange}
-                  />
-                </div>
-                <div className="mx-2 mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
-                    To Date
-                  </label>
-                  <input
-                    type="date"
-                    // type="datetime-local"
-                    className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
-                    value={toDate}
-                    onChange={handleToDateChange}
-                  />
-                </div>
-              </div>
-            ) : dropDown === "serial" ? (
-              <div className="flex flex-col">
-                <label
-                  htmlFor="serialNumber"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-800"
-                >
-                  Serial Number
+            <div className="flex">
+              <div className="mx-2 mb-2 w-44">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
+                  <span className="font-semibold ">From Date :</span> {fromDate}
                 </label>
                 <input
-                  type="text"
-                  id="serialNumber"
-                  className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
-                  placeholder="Serial Number..."
-                  value={searchTerm}
-                  onClick={handleSearchBySerial}
-                  onChange={handleSerialChange}
+                  type="date"
+                  // type="datetime-local"
+                  className="rounded-md h-9 text-sm border-gray-400 p-2 w-44"
+                  value={fromDate}
+                  onChange={handleFromDateChange}
                 />
               </div>
-            ) : (
-              setDropDown("date")
-            )}
+              <div className="mx-2 mb-2 w-44">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
+                  <span className="font-semibold ">To Date :</span> {toDate}
+                </label>
+                <input
+                  type="date"
+                  // type="datetime-local"
+                  className="rounded-md h-9 text-sm border-gray-400 p-2 w-44"
+                  value={toDate}
+                  onChange={handleToDateChange}
+                />
+              </div>
+            </div>
             {/* </div> */}
           </div>
 
           <div className="justify-items-center mx-2 mt-3">
             <button
-              onClick={
-                dropDown === "serial" ? handleSearchBySerial : searchWithDate
-              }
+              onClick={searchWithDate}
               className="mx-2 my-1 py-1 px-2 bg-green-500 hover:bg-green-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn"
             >
               Search
@@ -601,9 +448,6 @@ const DataReport = () => {
         </div>
 
         <div className={dropdownOpen === true ? "p-4" : "p-4"}>
-          {/* <Paper
-            
-          > */}
           <TablePagination
             className={dropdownOpen === true ? "mt-12" : ""}
             rowsPerPageOptions={[5, 10, 500, 1000, 5000, 10000]}
@@ -656,110 +500,31 @@ const DataReport = () => {
                         <StyledTableCell
                           key={column.id}
                           align={column.aln || "left"}
+                          className={
+                            column.id === "loadJudgementDesc" ||
+                            column.id === "distanceJudgementDesc" ||
+                            column.id === "totalJudgementDesc"
+                              ? "font-semibold"
+                              : ""
+                          }
                           style={{
-                            color: (() => {
-                              if (
-                                column.id === "totalJudgement" ||
-                                column.id === "qrJudgement" ||
-                                column.id === "currentJud" ||
-                                column.id === "sensitivityJud" ||
-                                column.id === "thdJud" ||
-                                column.id === "frequencyJud"
-                              ) {
-                                if (column.id === "qrJudgement") {
-                                  return row[column.id] === 1 ||
-                                    row[column.id] === "PASS" ||
-                                    row[column.id] === "PASSED"
-                                    ? "green"
-                                    : "red";
-                                }
-                                return row[column.id] === 1 ||
-                                  row[column.id] === "PASS"
-                                  ? "green"
-                                  : "red";
-                              }
-
-                              if (
-                                column.id === "thdJud" ||
-                                column.id === "laserMarkStatus" ||
-                                column.id === "creationDate" ||
-                                column.id === "tracReportStatus" ||
-                                column.id === "qrStatus" ||
-                                column.id === "acousticStatus" ||
-                                column.id === "reTestFlag"
-                              ) {
-                                return getColor(row[column.id]);
-                              }
-                              return "inherit";
-                            })(),
+                            color:
+                              (column.id === "loadJudgementDesc" ||
+                                column.id === "distanceJudgementDesc" ||
+                                column.id === "totalJudgementDesc") &&
+                              row[column.id] === "OK"
+                                ? "green"
+                                : (column.id === "loadJudgementDesc" ||
+                                    column.id === "distanceJudgementDesc" ||
+                                    column.id === "totalJudgementDesc") &&
+                                  row[column.id] !== "NOK"
+                                ? "red"
+                                : "inherit",
                           }}
                         >
-                          {(() => {
-                            if (
-                              column.id === "lastUpdateDate" ||
-                              column.id === "creationDate"
-                            ) {
-                              return formatDateTimeSlash(row[column.id]);
-                            }
-
-                            if (
-                              column.id === "sensitivityResult" ||
-                              column.id === "thdResult" ||
-                              column.id === "currentMeasured"
-                            ) {
-                              return toFixedTwo(row[column.id]);
-                            }
-
-                            if (column.id === "id") {
-                              const extractedCode = row.serialCode
-                                ? row.serialCode.split("-").pop()
-                                : "N/A";
-
-                              const number =
-                                extractedCode !== "N/A"
-                                  ? parseInt(extractedCode, 10)
-                                  : "N/A";
-
-                              return number;
-                            }
-
-                            if (
-                              column.id === "totalJudgement" ||
-                              column.id === "qrJudgement" ||
-                              column.id === "currentJud" ||
-                              column.id === "sensitivityJud" ||
-                              column.id === "thdJud" ||
-                              column.id === "frequencyJud"
-                            ) {
-                              if (column.id === "qrJudgement") {
-                                return row[column.id] === 1 ||
-                                  row[column.id] === "PASS" ||
-                                  row[column.id] === "PASSED"
-                                  ? "PASS"
-                                  : row[column.id] === 5 ||
-                                    row[column.id] === 3 ||
-                                    row[column.id] === "FAIL" ||
-                                    row[column.id] === "FAILED"
-                                  ? "FAIL"
-                                  : row[column.id] !== 2 ||
-                                    row[column.id] !== 3 ||
-                                    row[column.id] !== "FAIL" ||
-                                    row[column.id] !== "FAILED"
-                                  ? "NA"
-                                  : mapStatus(row[column.id]);
-                              }
-
-                              return mapStatus(row[column.id]);
-                            }
-                            if (column.id === "reTestFlag") {
-                              return row[column.id] === false
-                                ? "A"
-                                : row[column.id] === true
-                                ? "R"
-                                : "unknown";
-                            }
-                            return row[column.id] || "";
-                          })()}
+                          {column.id === "productionDate"
+                            ? formatToCustomAmPm(row[column.id])
+                            : row[column.id]}
                         </StyledTableCell>
                       ))}
                     </StyledTableRow>
