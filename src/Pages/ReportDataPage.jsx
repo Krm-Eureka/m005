@@ -445,7 +445,8 @@ const DataReport = () => {
                     searchTerm ? "hidden" : ""
                   } bg-blue-500 hover:bg-blue-600 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
                 >
-                  EXPORT ALL Exportar All
+                  {/* EXPORT ALL  */}
+                  Exportar All
                 </button>
               </>
             ) : (
