@@ -9,19 +9,17 @@ const DataBar = ({
   disable = false,
 }) => {
   const isError =
-    value === "jig1" ||
-    value === "jig2" ||
     value === "NONE" ||
     value === "Invalid Date" ||
     // value.trim() === "" ||
     value === "NOK";
-  const isWarning =
-    value !== "jig1" ||
-    value !== "jig2" ||
+    const isWarning =
+    (title === 'JIG' && (value !== "1" || value !== "2" || value === "0")) ||
     value === "Unknown" ||
     value === "No_Data" ||
     value === undefined ||
     value === null;
+  
   const isSuccess = !isError && !isWarning;
 
   return (
@@ -39,6 +37,8 @@ const DataBar = ({
             ? "NOK"
             : isError
             ? "NONE"
+            : isWarning
+            ? "Invalid_Data"
             : value
         }
         className={`cursor-${cursor} w-${wth} p-1.5 bg-gray-50 ${

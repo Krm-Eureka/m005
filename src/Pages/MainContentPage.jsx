@@ -124,7 +124,7 @@ const MainPage = () => {
                       title="JIG"
                       // title="Time"
                       type="text"
-                      value={i?.jigDesc === 'jig1'? '1' : i?.jigDesc === 'jig2' ? '2' : 'invalid_Data'}
+                      value={i?.jigDesc === 'jig1'? '1' : i?.jigDesc === 'jig2' ? '2' : '0'}
                       disable={true}
                     />
                   </div>
