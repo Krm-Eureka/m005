@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import HeaderLayout from "../Components/HeaderLayout-Component";
 import Loading from "../Components/Loading";
 import DataBar from "../Components/DataBar-Component";
+import traceabilityService from "../Services/data-service/TraceabilityData";
 
 const MainPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const getJudgementText = (value) => {
@@ -16,75 +17,12 @@ const MainPage = () => {
       ? "NOK"
       : "Unknown";
   };
-
-  const initialData = useMemo(
-    () => [
-      {
-        date: "01-11-2024",
-        time: "15:46",
-        partNumber: "TesT-77997",
-        totalJudgeMent: 1,
-        load: 23.12,
-        loadJudgeMent: 2,
-        distance: 12.34,
-        distanceJudgeMent: 1,
-        logRequest: true,
-        systemClock: false,
-        lockAcknowladge: 1,
-      },
-      {
-        date: "02-11-2024",
-        time: "10:30",
-        partNumber: "TesT-88001",
-        totalJudgeMent: 0,
-        load: 18.45,
-        loadJudgeMent: 1,
-        distance: 10.78,
-        distanceJudgeMent: 1,
-        logRequest: false,
-        systemClock: true,
-        lockAcknowladge: 0,
-      },
-    ],
-    []
-  );
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setData(initialData);
-      setData((prevData) => {
-        return prevData.map((i) => ({
-          ...i,
-          partNumber:
-            "TEST-" +
-            String(Math.floor(Math.random() * 100000000)).padStart(8, "0"),
-          load: i.load + Math.random(),
-          distance: i.distance + Math.random(),
-          loadJudgeMent: Math.floor(Math.random() * 4),
-          distanceJudgeMent: Math.floor(Math.random() * 4),
-          totalJudgeMent: Math.floor(Math.random() * 4),
-        }));
-      });
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [initialData]);
-
-  useEffect(() => {
-    if (data.length <= 0) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [data]);
-
-  console.log(loading);
-
-  // const TestClick = () => {
-  //   setData([
+  // const initialData = useMemo(
+  //   () => [
   //     {
   //       date: "01-11-2024",
   //       time: "15:46",
-  //       partNumber: "TA77997",
+  //       partNumber: "TesT-77997",
   //       totalJudgeMent: 1,
   //       load: 23.12,
   //       loadJudgeMent: 2,
@@ -97,7 +35,7 @@ const MainPage = () => {
   //     {
   //       date: "02-11-2024",
   //       time: "10:30",
-  //       partNumber: "TA88001",
+  //       partNumber: "TesT-88001",
   //       totalJudgeMent: 0,
   //       load: 18.45,
   //       loadJudgeMent: 1,
@@ -107,112 +45,49 @@ const MainPage = () => {
   //       systemClock: true,
   //       lockAcknowladge: 0,
   //     },
-  //     {
-  //       date: "03-11-2024",
-  //       time: "12:20",
-  //       partNumber: "TA66045",
-  //       totalJudgeMent: 1,
-  //       load: 29.34,
-  //       loadJudgeMent: 3,
-  //       distance: 15.23,
-  //       distanceJudgeMent: 1,
-  //       logRequest: true,
-  //       systemClock: false,
-  //       lockAcknowladge: 1,
-  //     },
-  //     {
-  //       date: "04-11-2024",
-  //       time: "09:15",
-  //       partNumber: "TA55039",
-  //       totalJudgeMent: 2,
-  //       load: 22.89,
-  //       loadJudgeMent: 2,
-  //       distance: 11.67,
-  //       distanceJudgeMent: 1,
-  //       logRequest: true,
-  //       systemClock: false,
-  //       lockAcknowladge: 0,
-  //     },
-  //     {
-  //       date: "05-11-2024",
-  //       time: "14:50",
-  //       partNumber: "TA99010",
-  //       totalJudgeMent: 1,
-  //       load: 25.9,
-  //       loadJudgeMent: 3,
-  //       distance: 14.32,
-  //       distanceJudgeMent: 1,
-  //       logRequest: true,
-  //       systemClock: true,
-  //       lockAcknowladge: 1,
-  //     },
-  //     {
-  //       date: "06-11-2024",
-  //       time: "16:00",
-  //       partNumber: "TA33020",
-  //       totalJudgeMent: 0,
-  //       load: 20.78,
-  //       loadJudgeMent: 2,
-  //       distance: 12.45,
-  //       distanceJudgeMent: 2,
-  //       logRequest: false,
-  //       systemClock: true,
-  //       lockAcknowladge: 0,
-  //     },
-  //     {
-  //       date: "07-11-2024",
-  //       time: "11:25",
-  //       partNumber: "TA11234",
-  //       totalJudgeMent: 1,
-  //       load: 27.55,
-  //       loadJudgeMent: 3,
-  //       distance: 13.78,
-  //       distanceJudgeMent: 3,
-  //       logRequest: true,
-  //       systemClock: false,
-  //       lockAcknowladge: 1,
-  //     },
-  //     {
-  //       date: "08-11-2024",
-  //       time: "08:40",
-  //       partNumber: "TA44321",
-  //       totalJudgeMent: 2,
-  //       load: 19.34,
-  //       loadJudgeMent: 1,
-  //       distance: 10.89,
-  //       distanceJudgeMent: 2,
-  //       logRequest: false,
-  //       systemClock: true,
-  //       lockAcknowladge: 0,
-  //     },
-  //     {
-  //       date: "09-11-2024",
-  //       time: "13:05",
-  //       partNumber: "TA55431",
-  //       totalJudgeMent: 1,
-  //       load: 24.67,
-  //       loadJudgeMent: 2,
-  //       distance: 12.34,
-  //       distanceJudgeMent: 2,
-  //       logRequest: true,
-  //       systemClock: false,
-  //       lockAcknowladge: 1,
-  //     },
-  //     {
-  //       date: "10-11-2024",
-  //       time: "17:30",
-  //       partNumber: "TA88077",
-  //       totalJudgeMent: 2,
-  //       load: 21.89,
-  //       loadJudgeMent: 2,
-  //       distance: 11.78,
-  //       distanceJudgeMent: 1,
-  //       logRequest: false,
-  //       systemClock: true,
-  //       lockAcknowladge: 0,
-  //     },
-  //   ]);
-  // };
+  //   ],
+  //   []
+  // );
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     // setData(initialData);
+  //     setData((prevData) => {
+  //       return prevData.map((i) => ({
+  //         ...i,
+  //         partNumber:
+  //           "TEST-" +
+  //           String(Math.floor(Math.random() * 100000000)).padStart(8, "0"),
+  //         load: i.load + Math.random(),
+  //         distance: i.distance + Math.random(),
+  //         loadJudgeMent: Math.floor(Math.random() * 4),
+  //         distanceJudgeMent: Math.floor(Math.random() * 4),
+  //         totalJudgeMent: Math.floor(Math.random() * 4),
+  //       }));
+  //     });
+  //   }, 2000);
+
+  //   return () => clearInterval(interval);
+  // }, [
+  //   initialData
+  // ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await traceabilityService.get2LastData(
+          traceabilityService.version,
+          setData
+        );
+        setLoading(false)
+      } catch (err) {
+        setError(err);
+      }
+    };
+    fetchData();
+    const intervalId = setInterval(fetchData, 2000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  console.log(loading);
 
   return (
     <>
@@ -235,13 +110,13 @@ const MainPage = () => {
                     <DataBar
                       title="Date"
                       type="text"
-                      value={i?.date}
+                      value={i?.productionDateDesc}
                       disable={true}
                     />
                     <DataBar
                       title="Time"
                       type="text"
-                      value={i?.time}
+                      value={i?.productionTimeDesc}
                       disable={true}
                     />
                   </div>
@@ -249,25 +124,25 @@ const MainPage = () => {
                     <DataBar
                       title="Load (N)"
                       type="text"
-                      value={i?.load.toFixed(2)}
+                      value={i?.loadValue}
                       disable={true}
                     />
                     <DataBar
                       title="Load JudgeMent"
                       type="text"
-                      value={getJudgementText(i?.loadJudgeMent)}
+                      value={getJudgementText(i?.loadJudgement)}
                       disable={true}
                     />
                     <DataBar
                       title="Distance (mm)"
                       type="text"
-                      value={i?.distance.toFixed(3)}
+                      value={i?.distanceValue}
                       disable={true}
                     />
                     <DataBar
                       title="Distance JudgeMent"
                       type="text"
-                      value={getJudgementText(i?.distanceJudgeMent)}
+                      value={getJudgementText(i?.distanceJudgement)}
                       disable={true}
                     />
                   </div>
@@ -275,7 +150,7 @@ const MainPage = () => {
                     <DataBar
                       title="Total JudgeMent"
                       type="text"
-                      value={getJudgementText(i?.totalJudgeMent)}
+                      value={getJudgementText(i?.totalJudgement)}
                       disable={true}
                     />
                   </div>
