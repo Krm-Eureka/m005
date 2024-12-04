@@ -95,7 +95,7 @@ const MainPage = () => {
           <p>EOLT Station : AUTO Mode</p>
         </div>
 
-        {data > 0 && loading === false ? (
+        {data.length > 0 && loading === false ? (
           data.map((i, idx) => (
             <div key={idx} className="container">
               <div className="content px-6 py-6 items-center">
