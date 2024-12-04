@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import HeaderLayout from "../Components/HeaderLayout-Component";
 import Loading from "../Components/Loading";
 import DataBar from "../Components/DataBar-Component";
@@ -16,138 +16,38 @@ const MainPage = () => {
       ? "NOK"
       : "Unknown";
   };
-  const initialData = [
-    {
-      date: "01-11-2024",
-      time: "15:46",
-      partNumber: "TesT-77997",
-      totalJudgeMent: 1,
-      load: 23.12,
-      loadJudgeMent: 2,
-      distance: 12.34,
-      distanceJudgeMent: 1,
-      logRequest: true,
-      systemClock: false,
-      lockAcknowladge: 1,
-    },
-    // {
-    //   date: "02-11-2024",
-    //   time: "10:30",
-    //   partNumber: "TesT-88001",
-    //   totalJudgeMent: 0,
-    //   load: 18.45,
-    //   loadJudgeMent: 1,
-    //   distance: 10.78,
-    //   distanceJudgeMent: 1,
-    //   logRequest: false,
-    //   systemClock: true,
-    //   lockAcknowladge: 0,
-    // },
-    // {
-    //   date: "03-11-2024",
-    //   time: "12:20",
-    //   partNumber: "TesT-66045",
-    //   totalJudgeMent: 1,
-    //   load: 29.34,
-    //   loadJudgeMent: 3,
-    //   distance: 15.23,
-    //   distanceJudgeMent: 1,
-    //   logRequest: true,
-    //   systemClock: false,
-    //   lockAcknowladge: 1,
-    // },
-    // {
-    //   date: "04-11-2024",
-    //   time: "09:15",
-    //   partNumber: "TesT-55039",
-    //   totalJudgeMent: 2,
-    //   load: 22.89,
-    //   loadJudgeMent: 2,
-    //   distance: 11.67,
-    //   distanceJudgeMent: 1,
-    //   logRequest: true,
-    //   systemClock: false,
-    //   lockAcknowladge: 0,
-    // },
-    // {
-    //   date: "05-11-2024",
-    //   time: "14:50",
-    //   partNumber: "TesT-99010",
-    //   totalJudgeMent: 1,
-    //   load: 25.9,
-    //   loadJudgeMent: 3,
-    //   distance: 14.32,
-    //   distanceJudgeMent: 1,
-    //   logRequest: true,
-    //   systemClock: true,
-    //   lockAcknowladge: 1,
-    // },
-    // {
-    //   date: "06-11-2024",
-    //   time: "16:00",
-    //   partNumber: "TesT-33020",
-    //   totalJudgeMent: 0,
-    //   load: 20.78,
-    //   loadJudgeMent: 2,
-    //   distance: 12.45,
-    //   distanceJudgeMent: 2,
-    //   logRequest: false,
-    //   systemClock: true,
-    //   lockAcknowladge: 0,
-    // },
-    // {
-    //   date: "07-11-2024",
-    //   time: "11:25",
-    //   partNumber: "TesT-11234",
-    //   totalJudgeMent: 1,
-    //   load: 27.55,
-    //   loadJudgeMent: 3,
-    //   distance: 13.78,
-    //   distanceJudgeMent: 3,
-    //   logRequest: true,
-    //   systemClock: false,
-    //   lockAcknowladge: 1,
-    // },
-    // {
-    //   date: "08-11-2024",
-    //   time: "08:40",
-    //   partNumber: "TesT-44321",
-    //   totalJudgeMent: 2,
-    //   load: 19.34,
-    //   loadJudgeMent: 1,
-    //   distance: 10.89,
-    //   distanceJudgeMent: 2,
-    //   logRequest: false,
-    //   systemClock: true,
-    //   lockAcknowladge: 0,
-    // },
-    // {
-    //   date: "09-11-2024",
-    //   time: "13:05",
-    //   partNumber: "TesT-55431",
-    //   totalJudgeMent: 1,
-    //   load: 24.67,
-    //   loadJudgeMent: 2,
-    //   distance: 12.34,
-    //   distanceJudgeMent: 2,
-    //   logRequest: true,
-    //   systemClock: false,
-    //   lockAcknowladge: 1,
-    // },
-    // {
-    //   date: "10-11-2024",
-    //   time: "17:30",
-    //   partNumber: "TesT-88077",
-    //   totalJudgeMent: 2,
-    //   load: 21.89,
-    //   loadJudgeMent: 2,
-    //   distance: 11.78,
-    //   distanceJudgeMent: 1,
-    //   logRequest: false,
-    //   systemClock: true,
-    //   lockAcknowladge: 0,
-    // },
-  ];
+
+  const initialData = useMemo(
+    () => [
+      {
+        date: "01-11-2024",
+        time: "15:46",
+        partNumber: "TesT-77997",
+        totalJudgeMent: 1,
+        load: 23.12,
+        loadJudgeMent: 2,
+        distance: 12.34,
+        distanceJudgeMent: 1,
+        logRequest: true,
+        systemClock: false,
+        lockAcknowladge: 1,
+      },
+      {
+        date: "02-11-2024",
+        time: "10:30",
+        partNumber: "TesT-88001",
+        totalJudgeMent: 0,
+        load: 18.45,
+        loadJudgeMent: 1,
+        distance: 10.78,
+        distanceJudgeMent: 1,
+        logRequest: false,
+        systemClock: true,
+        lockAcknowladge: 0,
+      },
+    ],
+    []
+  );
   useEffect(() => {
     const interval = setInterval(() => {
       setData(initialData);
@@ -164,7 +64,7 @@ const MainPage = () => {
           totalJudgeMent: Math.floor(Math.random() * 4),
         }));
       });
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [initialData]);
@@ -315,70 +215,72 @@ const MainPage = () => {
   // };
 
   return (
-    <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
-      <div className="title bg-green-500 p-2 rounded-t-md font-bold">
-        <p>EOLT Station : AUTO Mode</p>
-      </div>
+    <>
+      <HeaderLayout page="Main Page"/>
+      <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
+        <div className="title bg-green-500 p-2 rounded-t-md font-bold">
+          <p>EOLT Station : AUTO Mode</p>
+        </div>
 
-      {loading === false ? (
-        data.map((i, idx) => (
-          <div key={idx} className="container">
-            <div className="content px-6 py-6 items-center">
-              <div className="mb-2">
-                <p className="font-bold text-2xl mb-2">
-                  PartNumber :{" "}
-                  <span className="text-white">{i?.partNumber}</span>
-                </p>
-                <div className="search-card flex flex-between flex-wrap">
-                  <DataBar
-                    title="Date"
-                    type="text"
-                    value={i?.date}
-                    disable={true}
-                  />
-                  <DataBar
-                    title="Time"
-                    type="text"
-                    value={i?.time}
-                    disable={true}
-                  />
+        {loading === false ? (
+          data.map((i, idx) => (
+            <div key={idx} className="container">
+              <div className="content px-6 py-6 items-center">
+                <div className="mb-2 bg-white p-4 rounded-lg w-fit">
+                  <p className="font-bold text-2xl mb-2">
+                    PartNumber :{" "}
+                    <span className="text-gray-700">{i?.partNumber}</span>
+                  </p>
+                  <div className="search-card flex flex-between flex-wrap">
+                    <DataBar
+                      title="Date"
+                      type="text"
+                      value={i?.date}
+                      disable={true}
+                    />
+                    <DataBar
+                      title="Time"
+                      type="text"
+                      value={i?.time}
+                      disable={true}
+                    />
+                  </div>
+                  <div className="search-card flex flex-between flex-wrap">
+                    <DataBar
+                      title="Load (N)"
+                      type="text"
+                      value={i?.load.toFixed(2)}
+                      disable={true}
+                    />
+                    <DataBar
+                      title="Load JudgeMent"
+                      type="text"
+                      value={getJudgementText(i?.loadJudgeMent)}
+                      disable={true}
+                    />
+                    <DataBar
+                      title="Distance (mm)"
+                      type="text"
+                      value={i?.distance.toFixed(3)}
+                      disable={true}
+                    />
+                    <DataBar
+                      title="Distance JudgeMent"
+                      type="text"
+                      value={getJudgementText(i?.distanceJudgeMent)}
+                      disable={true}
+                    />
+                  </div>
+                  <div className="search-card flex flex-between flex-wrap">
+                    <DataBar
+                      title="Total JudgeMent"
+                      type="text"
+                      value={getJudgementText(i?.totalJudgeMent)}
+                      disable={true}
+                    />
+                  </div>
                 </div>
-                <div className="search-card flex flex-between flex-wrap">
-                  <DataBar
-                    title="Load (N)"
-                    type="text"
-                    value={i?.load.toFixed(2)}
-                    disable={true}
-                  />
-                  <DataBar
-                    title="Load JudgeMent"
-                    type="text"
-                    value={getJudgementText(i?.loadJudgeMent)}
-                    disable={true}
-                  />
-                  <DataBar
-                    title="Distance (mm)"
-                    type="text"
-                    value={i?.distance.toFixed(3)}
-                    disable={true}
-                  />
-                  <DataBar
-                    title="Distance JudgeMent"
-                    type="text"
-                    value={getJudgementText(i?.distanceJudgeMent)}
-                    disable={true}
-                  />
-                </div>
-                <div className="search-card flex flex-between flex-wrap">
-                  <DataBar
-                    title="Total JudgeMent"
-                    type="text"
-                    value={getJudgementText(i?.totalJudgeMent)}
-                    disable={true}
-                  />
-                </div>
-              </div>
-              {/* <form
+                {/* <form
                 className="search-card flex flex-between flex-wrap"
                 action=""
               >
@@ -398,13 +300,13 @@ const MainPage = () => {
                   value={getJudgementText(i?.loadJudgeMent)}
                 />
               </form> */}
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <Loading text="Data Not Found . . ." />
-      )}
-      {loading === true ? (
+          ))
+        ) : (
+          <Loading text="Data Not Found . . ." />
+        )}
+        {/* {loading === true ? (
         <Loading text="Data Not Found . . ." />
       ) : error ? (
         <div>Error: {error}</div>
@@ -477,8 +379,9 @@ const MainPage = () => {
             </tbody>
           </table>
         </div>
-      )}
-    </div>
+      )} */}
+      </div>
+    </>
   );
 };
 
