@@ -77,7 +77,7 @@ const MainPage = () => {
           traceabilityService.version,
           setData
         );
-        setLoading(false)
+        setLoading(false);
       } catch (err) {
         setError(err);
       }
@@ -87,17 +87,15 @@ const MainPage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  console.log(loading);
-
   return (
     <>
-      <HeaderLayout page="Main Page"/>
+      <HeaderLayout page="Main Page" />
       <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
         <div className="title bg-green-500 p-2 rounded-t-md font-bold">
           <p>EOLT Station : AUTO Mode</p>
         </div>
 
-        {loading === false ? (
+        {data > 0 && loading === false ? (
           data.map((i, idx) => (
             <div key={idx} className="container">
               <div className="content px-6 py-6 items-center">
@@ -108,13 +106,15 @@ const MainPage = () => {
                   </p>
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar
-                      title="Date"
+                      title="Fecha"
+                      // title="Date"
                       type="text"
                       value={i?.productionDateDesc}
                       disable={true}
                     />
                     <DataBar
-                      title="Time"
+                      title="Hora"
+                      // title="Time"
                       type="text"
                       value={i?.productionTimeDesc}
                       disable={true}
@@ -122,25 +122,29 @@ const MainPage = () => {
                   </div>
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar
-                      title="Load (N)"
+                      title="Carga (N)"
+                      // title="Load (N)"
                       type="text"
                       value={i?.loadValue}
                       disable={true}
                     />
                     <DataBar
-                      title="Load JudgeMent"
+                      title="Juicio de Carga"
+                      // title="Load JudgeMent"
                       type="text"
                       value={getJudgementText(i?.loadJudgement)}
                       disable={true}
                     />
                     <DataBar
-                      title="Distance (mm)"
+                      title="Distancia (mm)"
+                      // title="Distance (mm)"
                       type="text"
                       value={i?.distanceValue}
                       disable={true}
                     />
                     <DataBar
-                      title="Distance JudgeMent"
+                      title="Juicio de Distancia"
+                      // title="Distance JudgeMent"
                       type="text"
                       value={getJudgementText(i?.distanceJudgement)}
                       disable={true}
@@ -148,7 +152,8 @@ const MainPage = () => {
                   </div>
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar
-                      title="Total JudgeMent"
+                      title="Juicio Total"
+                      // title="Total JudgeMent"
                       type="text"
                       value={getJudgementText(i?.totalJudgement)}
                       disable={true}
