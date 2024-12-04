@@ -66,7 +66,7 @@ const HeaderLayout = (props) => {
               {/* <i className="fa-solid fa-bars"></i> */}
             </button>
             <h4 className="text-gray-700 my-4 text-lg md:text-xl font-medium dark:text-gray-700">
-              EOLT Station | {PAGE}
+            AGS KM-KX END CAP STATION AUTOMATIC | {PAGE}
             </h4>
             <p className="pl-2 text-xs pt-2">v{packageJson.version}</p>
             {/*
@@ -77,7 +77,7 @@ const HeaderLayout = (props) => {
             */}
           </div>
           <div className="r px-4 flex flew-row items-center">
-            <Link
+            {/* <Link
               to="/auth/login"
               className="bg-white-400 hover:bg-gray-300  px-2 py-2 rounded-md block text-sm font-medium text-gray-700 hover:text-gray-600 "
               onClick={handleLogout}
@@ -90,10 +90,11 @@ const HeaderLayout = (props) => {
                   src={OUT}
                   alt={"Logout"}
                   className="mx-2 h-6 w-6 justify-center mt-1"
-                />
-                <span className="font-semibold text-lg">Logout</span>
+                /> */}
+                {/* <span className="font-semibold text-lg">Logout</span> */}
+                {/* <span className="font-semibold text-lg">Cerrar sesión</span>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div
@@ -102,7 +103,8 @@ const HeaderLayout = (props) => {
           }card-content bg-gray-400 mx-4 mb-4  rounded-md w-90% h-fit text-white`}
         >
           <div className="title bg-gray-700 p-2 rounded-t-md font-bold ">
-            <p>Navigation</p>
+            {/* <p>Navigation</p> */}
+            <p>Navegación</p>
           </div>
           <div className="content p-1 items-center">
             <div className=" flex flex-between flex-wrap justify-start">
@@ -121,7 +123,8 @@ const HeaderLayout = (props) => {
               >
                 <div className="items-center px-2">
                   <i className="text-xl fa-solid fa-circle-play"></i>
-                  <span className="ml-2">MainPage</span>
+                  {/* <span className="ml-2">MainPage</span> */}
+                  <span className="ml-2">Pagina principal</span>
                 </div>
               </Link>
               {/* <Link
@@ -148,7 +151,8 @@ const HeaderLayout = (props) => {
               >
                 <div className="items-center px-2">
                   <i className="text-xl fa-solid fa-folder-tree"></i>
-                  <span className="ml-2">Data Report</span>
+                  {/* <span className="ml-2">Data Report</span> */}
+                  <span className="ml-2">Reportes</span>
                 </div>
               </Link>
               <Link

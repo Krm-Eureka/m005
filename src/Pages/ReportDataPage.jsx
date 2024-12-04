@@ -59,7 +59,7 @@ const columns = [
   // },
   {
     id: "jigDesc",
-    label: "dispositivo de fijación",
+    label: "JIG",
     sortable: true,
     w: 150,
     aln: "center",
@@ -261,24 +261,26 @@ const DataReport = () => {
       const rowDateStr = rowDate.toISOString().split("T")[0];
       const fromStr = from ? from.toISOString().split("T")[0] : null;
       const toStr = to ? to.toISOString().split("T")[0] : null;
-    
-      return (!fromStr || rowDateStr >= fromStr) && (!toStr || rowDateStr <= toStr);
+
+      return (
+        (!fromStr || rowDateStr >= fromStr) && (!toStr || rowDateStr <= toStr)
+      );
     };
     const isSearchMatch =
       searchTerm === "" ||
       Object.values(row).some((value) =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       );
-// console.log(isDateInRange);
+    // console.log(isDateInRange);
     const isSerialMatch =
       !serialNumber || row.serialCode.includes(serialNumber);
     return isDateInRange && isSearchMatch && isSerialMatch;
   });
   const sortedRows = sortRows(filteredRows, order, orderBy);
   // console.log(filteredRows);
-  // 
+  //
   // console.log(sortedRows);
-  
+
   const exportToCSV = () => {
     const headers = columns.map((column) => `"${column.label}"`).join(",");
 
@@ -352,10 +354,10 @@ const DataReport = () => {
   }
   return (
     <>
-      <HeaderLayout page="Data Report" />
+      <HeaderLayout page="Reporte de datos" />
       <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
         <div className="title bg-green-500 p-2 rounded-t-md font-bold">
-          <p>Traceability Report of EOLTStation</p>
+          <p>Informe de trazabilidad de : AGS KM-KX END CAP STATION AUTOMATIC</p>
         </div>
         <div className="flex flex-wrap mx-4 py-2 h-fit items-center justify-center">
           <div className="mx-2 mb-2 flex ">
@@ -383,7 +385,8 @@ const DataReport = () => {
             <div className="flex">
               <div className="mx-2 mb-2 w-44">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
-                  <span className="font-semibold ">From Date :</span> {fromDate}
+                  <span className="font-semibold ">De Fecha </span>{" "}
+                  {/*{fromDate}*/}
                 </label>
                 <input
                   type="date"
@@ -395,7 +398,8 @@ const DataReport = () => {
               </div>
               <div className="mx-2 mb-2 w-44">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-800">
-                  <span className="font-semibold ">To Date :</span> {toDate}
+                  <span className="font-semibold ">A Fecha </span>{" "}
+                  {/*{toDate}*/}
                 </label>
                 <input
                   type="date"
@@ -414,13 +418,15 @@ const DataReport = () => {
               onClick={searchWithDate}
               className="mx-2 my-1 py-1 px-2 bg-green-500 hover:bg-green-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn"
             >
-              Search
+              {/* Search */}
+              Buscar
             </button>
             <button
               onClick={handleClear}
               className={`mx-2 my-1 py-1 px-2  bg-red-500 hover:bg-red-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
             >
-              CLEAR
+              {/* CLEAR */}
+              limpiar
             </button>
             {rows && rows.length > 0 ? (
               <>
@@ -430,7 +436,8 @@ const DataReport = () => {
                     !searchTerm ? "hidden" : ""
                   } bg-blue-500 hover:bg-blue-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
                 >
-                  EXPORT
+                  {/* EXPORT */}
+                  Exportar
                 </button>
                 <button
                   onClick={exportToCSV}
@@ -438,7 +445,7 @@ const DataReport = () => {
                     searchTerm ? "hidden" : ""
                   } bg-blue-500 hover:bg-blue-600 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
                 >
-                  EXPORT ALL
+                  EXPORT ALL Exportar All
                 </button>
               </>
             ) : (
@@ -450,7 +457,7 @@ const DataReport = () => {
         <div className={dropdownOpen === true ? "p-4" : "p-4"}>
           <TablePagination
             className={dropdownOpen === true ? "mt-12" : ""}
-            rowsPerPageOptions={[5, 10, 500, 1000, 5000, 10000]}
+            rowsPerPageOptions={[5, 10, 500, 1000, 5000]}
             component="div"
             count={sortedRows.length}
             rowsPerPage={rowsPerPage}

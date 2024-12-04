@@ -89,10 +89,11 @@ const MainPage = () => {
 
   return (
     <>
-      <HeaderLayout page="Main Page" />
+      <HeaderLayout page="Página principal" />
       <div className="flex flex-col text-gray-700 bg-gray-300 m-4 pb-4 rounded-md w-90% h-fit">
         <div className="title bg-green-500 p-2 rounded-t-md font-bold">
-          <p>EOLT Station : AUTO Mode</p>
+          <p>AGS KM-KX END CAP STATION AUTOMATIC : Página principal</p>
+          {/* <p>EOLT Station : AUTO Mode</p> */}
         </div>
 
         {data.length > 0 && loading === false ? (
