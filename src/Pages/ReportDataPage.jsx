@@ -109,7 +109,7 @@ const columns = [
   },
 
   {
-    id: "boxNumber",
+    id: "boxNo",
     label: "Número de Caja",
     sortable: true,
     w: 200,
@@ -130,7 +130,7 @@ const columns = [
     aln: "center",
   },
   {
-    id: "palletNumber",
+    id: "palletNo",
     label: "Número de Palet",
     sortable: true,
     w: 200,
