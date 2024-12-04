@@ -4,9 +4,8 @@ const version = "1";
 
 const getTraceabilityDataWithDate = (version, start, end, SET) => {
     console.log(start,"", end);
-    
   const getData = async () => {
-    const url = `/api/v${version}/AcousticTraceLog/GetByDateRange?startDate=${start}&endDate=${end}`;
+    const url = `/api/v${version}/TraceabilityLog/GetTraceabilityByDateRange?startDate=${start}&endDate=${end}`;
     console.log(url);
     try {
       const res = await endpoint.get(url);
