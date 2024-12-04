@@ -102,7 +102,7 @@ const MainPage = () => {
               <div className="content px-6 py-6 items-center">
                 <div className="mb-2 bg-white p-4 rounded-lg w-fit">
                   <p className="font-bold text-2xl mb-2">
-                    PartNumber :{" "}
+                  Número de pieza :{" "}
                     <span className="text-gray-700">{i?.partNumber}</span>
                   </p>
                   <div className="search-card flex flex-between flex-wrap">
