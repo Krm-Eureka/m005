@@ -12,9 +12,10 @@ function App() {
   return (
     <Router>
     <Routes>
-      <Route path="/" element={<RedirectIfLoggedIn />} />
+      <Route path="/" element={<MainPage/>}/>
+      {/* <Route path="/" element={<RedirectIfLoggedIn />} /> */}
       <Route path="*" element={<ErrorPage />} />
-      <Route path="/auth/login" element={<LoginPage />} />
+      {/* <Route path="/auth/login" element={<LoginPage />} /> */}
       <Route path="/auth/Unauthorized" element={<UnauthorizedPage />} />
 
       {/* <Route element={<ProtectedRoute/>}> */}
