@@ -49,6 +49,7 @@ const columns = [
     id: "productionDate",
     label: "Fecha y Hora",
     sortable: true,
+    w:200,
     aln: "center",
   },
   // {
