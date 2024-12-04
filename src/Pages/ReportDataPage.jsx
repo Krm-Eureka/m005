@@ -121,13 +121,11 @@ const DataReport = () => {
   const now = new Date();
   const NOW = `${now.getFullYear()}-${(now.getMonth() + 1)
     .toString()
-    .padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")} ${now
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+    .padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")} `;
+  // ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
 
   const [toDate, setToDate] = useState(NOW);
-  const [fromDate, setFromDate] = useState(today + " 00:00");
+  const [fromDate, setFromDate] = useState(today);
   // const [toDate, setToDate] = useState(today + " 23:59");
   const [serialNumber, setSerialNumber] = useState("");
   const [error, setError] = useState(null);
@@ -518,8 +516,8 @@ const DataReport = () => {
                     From Date
                   </label>
                   <input
-                    // type="date"
-                    type="datetime-local"
+                    type="date"
+                    // type="datetime-local"
                     className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
                     value={fromDate}
                     onChange={handleFromDateChange}
@@ -530,8 +528,8 @@ const DataReport = () => {
                     To Date
                   </label>
                   <input
-                    // type="date"
-                    type="datetime-local"
+                    type="date"
+                    // type="datetime-local"
                     className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
                     value={toDate}
                     onChange={handleToDateChange}
