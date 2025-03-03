@@ -116,14 +116,14 @@ const columns = [
     aln: "center",
   },
   {
-    id: "boxNumber",
+    id: "Create Box",
     label: "Crear caja",
     sortable: true,
     w: 200,
     aln: "center",
   },
   {
-    id: "boxNumber",
+    id: "Box qty",
     label: "Cajas Qty.",
     sortable: true,
     w: 200,
@@ -137,14 +137,14 @@ const columns = [
     aln: "center",
   },
   {
-    id: "palletNumber",
+    id: "Pallet qty",
     label: "Palets Qty.",
     sortable: true,
     w: 200,
     aln: "center",
   },
   {
-    id: "palletNumber",
+    id: "Create Pallet",
     label: "Crear Palet",
     sortable: true,
     w: 200,
