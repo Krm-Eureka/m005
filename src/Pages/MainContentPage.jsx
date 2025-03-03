@@ -50,7 +50,7 @@ const MainPage = () => {
   // );
   // useEffect(() => {
   //   const interval = setInterval(() => {
-  //     // setData(initialData);
+  //     setData(initialData);
   //     setData((prevData) => {
   //       return prevData.map((i) => ({
   //         ...i,
@@ -64,7 +64,7 @@ const MainPage = () => {
   //         totalJudgeMent: Math.floor(Math.random() * 4),
   //       }));
   //     });
-  //   }, 2000);
+  //   }, 1000);
 
   //   return () => clearInterval(interval);
   // }, [
@@ -96,7 +96,7 @@ const MainPage = () => {
           {/* <p>EOLT Station : AUTO Mode</p> */}
         </div>
 
-        {data.length > 0 && loading === false ? (
+        {data.length < 0 && loading === false ? (
           data.map((i, idx) => (
             <div key={idx} className="container">
               <div className="content px-6 py-6 items-center">
@@ -104,6 +104,10 @@ const MainPage = () => {
                   <p className="font-bold text-2xl mb-2">
                     Número de pieza :{" "}
                     <span className="text-gray-700">{i?.partNumber}</span>
+                  </p>
+                  <p className="font-bold text-md mb-2">
+                    Número de caja :{" "}
+                    <span className="text-gray-700">{i?.boxNo}</span>
                   </p>
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar

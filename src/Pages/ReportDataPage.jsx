@@ -487,7 +487,7 @@ const DataReport = () => {
         <div className={dropdownOpen === true ? "p-4" : "p-4"}>
           <TablePagination
             className={dropdownOpen === true ? "mt-12" : ""}
-            rowsPerPageOptions={[5, 10, 500, 1000, 5000]}
+            rowsPerPageOptions={[5, 10, 500, 1000]}
             component="div"
             count={sortedRows.length}
             rowsPerPage={rowsPerPage}
@@ -570,7 +570,7 @@ const DataReport = () => {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 500, 1000, 5000, 10000]}
+            rowsPerPageOptions={[5, 10, 500, 1000]}
             component="div"
             count={sortedRows.length}
             rowsPerPage={rowsPerPage}

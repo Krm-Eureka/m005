@@ -65,7 +65,7 @@ const LoginPage = () => {
         <img
           className="w-40 h-24 pt-4"
           src={ValeoLogo}
-          alt="Valeo_Logo_VCDA-M006"
+          alt="Valeo_Logo_VCDA-M005"
         />
       </a>
       <div className="w-full bg-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
