@@ -115,15 +115,15 @@ const columns = [
     w: 200,
     aln: "center",
   },
+  // {
+  //   id: "boxCreate",
+  //   label: "Crear caja",
+  //   sortable: true,
+  //   w: 200,
+  //   aln: "center",
+  // },
   {
-    id: "Create Box",
-    label: "Crear caja",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "Box qty",
+    id: "boxQty",
     label: "Cajas Qty.",
     sortable: true,
     w: 200,
@@ -137,19 +137,19 @@ const columns = [
     aln: "center",
   },
   {
-    id: "Pallet qty",
+    id: "palletQty",
     label: "Palets Qty.",
     sortable: true,
     w: 200,
     aln: "center",
   },
-  {
-    id: "Create Pallet",
-    label: "Crear Palet",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
+  // {
+  //   id: "palletCreate",
+  //   label: "Crear Palet",
+  //   sortable: true,
+  //   w: 200,
+  //   aln: "center",
+  // },
 ];
 const DataReport = () => {
   // const today = new Date().toISOString().split("T")[0];
@@ -201,8 +201,8 @@ const DataReport = () => {
           ? 1
           : -1
         : valueA < valueB
-        ? 1
-        : -1;
+          ? 1
+          : -1;
     });
   };
 
@@ -312,14 +312,21 @@ const DataReport = () => {
 
   const exportToCSV = () => {
     const headers = columns.map((column) => `"${column.label}"`).join(",");
+    console.log("Filtered Rows:", filteredRows);
 
     const csvRows = filteredRows.map((row) => {
       return columns
         .map((column) => {
           let value = row[column.id];
+          if (column.id === "partNumber") {
+            value = row["partNumber"];
+          } else if (column.id === "boxNo") {
+            value = row["boxNo"];
+          }
           if (column.id === "productionDate") {
             value = formatToCustomAmPm(value);
           }
+
           return typeof value === "string"
             ? `"${value.replace(/"/g, '""').replace(/,/g, "\\,")}"`
             : value || "";
@@ -393,23 +400,23 @@ const DataReport = () => {
             {rows && rows.length > 0
               ? ""
               : // <div className="flex-row">
-                //   <label
-                //     htmlFor="serialNumber"
-                //     className="block text-sm font-medium text-gray-700 dark:text-gray-800"
-                //   >
-                //     Serial Number
-                //   </label>
-                //   <input
-                //     type="text"
-                //     ref={inputRef}
-                //     id="serialNumber"
-                //     className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
-                //     placeholder="Serial Number..."
-                //     value={searchTerm}
-                //     onChange={handleSearchChange}
-                //   />
-                // </div>
-                ""}
+              //   <label
+              //     htmlFor="serialNumber"
+              //     className="block text-sm font-medium text-gray-700 dark:text-gray-800"
+              //   >
+              //     Serial Number
+              //   </label>
+              //   <input
+              //     type="text"
+              //     ref={inputRef}
+              //     id="serialNumber"
+              //     className="rounded-md h-9 text-sm border-gray-400 w-50 p-2"
+              //     placeholder="Serial Number..."
+              //     value={searchTerm}
+              //     onChange={handleSearchChange}
+              //   />
+              // </div>
+              ""}
             {/* <div className="flex"> */}
             <div className="flex">
               <div className="mx-2 mb-2 w-44">
@@ -461,18 +468,16 @@ const DataReport = () => {
               <>
                 <button
                   onClick={exportToCSV}
-                  className={`mx-2 my-1 py-1 px-2 ${
-                    !searchTerm ? "hidden" : ""
-                  } bg-blue-500 hover:bg-blue-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
+                  className={`mx-2 my-1 py-1 px-2 ${!searchTerm ? "hidden" : ""
+                    } bg-blue-500 hover:bg-blue-700 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
                 >
                   {/* EXPORT */}
                   Exportar
                 </button>
                 <button
                   onClick={exportToCSV}
-                  className={`mx-2 my-1 py-1 px-2 ${
-                    searchTerm ? "hidden" : ""
-                  } bg-blue-500 hover:bg-blue-600 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
+                  className={`mx-2 my-1 py-1 px-2 ${searchTerm ? "hidden" : ""
+                    } bg-blue-500 hover:bg-blue-600 text-gray-900 hover:text-white h-fit w-fit border rounded-btn`}
                 >
                   {/* EXPORT ALL  */}
                   Exportar All
@@ -487,7 +492,7 @@ const DataReport = () => {
         <div className={dropdownOpen === true ? "p-4" : "p-4"}>
           <TablePagination
             className={dropdownOpen === true ? "mt-12" : ""}
-            rowsPerPageOptions={[5, 10, 500, 1000]}
+            rowsPerPageOptions={[5, 10, 500, 1000, 5000]}
             component="div"
             count={sortedRows.length}
             rowsPerPage={rowsPerPage}
@@ -539,8 +544,8 @@ const DataReport = () => {
                           align={column.aln || "left"}
                           className={
                             column.id === "loadJudgementDesc" ||
-                            column.id === "distanceJudgementDesc" ||
-                            column.id === "totalJudgementDesc"
+                              column.id === "distanceJudgementDesc" ||
+                              column.id === "totalJudgementDesc"
                               ? "font-semibold"
                               : ""
                           }
@@ -549,14 +554,14 @@ const DataReport = () => {
                               (column.id === "loadJudgementDesc" ||
                                 column.id === "distanceJudgementDesc" ||
                                 column.id === "totalJudgementDesc") &&
-                              row[column.id] === "OK"
+                                row[column.id] === "OK"
                                 ? "green"
                                 : (column.id === "loadJudgementDesc" ||
-                                    column.id === "distanceJudgementDesc" ||
-                                    column.id === "totalJudgementDesc") &&
-                                  row[column.id] !== "NOK"
-                                ? "red"
-                                : "inherit",
+                                  column.id === "distanceJudgementDesc" ||
+                                  column.id === "totalJudgementDesc") &&
+                                  row[column.id] === "NOK"
+                                  ? "red"
+                                  : "inherit",
                           }}
                         >
                           {column.id === "productionDate"
@@ -570,7 +575,7 @@ const DataReport = () => {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 500, 1000]}
+            rowsPerPageOptions={[5, 10, 500, 1000, 5000, 10000]}
             component="div"
             count={sortedRows.length}
             rowsPerPage={rowsPerPage}

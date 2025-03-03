@@ -12,10 +12,10 @@ const MainPage = () => {
     return !value
       ? "No_Data"
       : value === 1
-      ? "OK"
-      : value === 2
-      ? "NOK"
-      : "Unknown";
+        ? "OK"
+        : value === 2
+          ? "NOK"
+          : "Unknown";
   };
   // const initialData = useMemo(
   //   () => [
@@ -50,7 +50,7 @@ const MainPage = () => {
   // );
   // useEffect(() => {
   //   const interval = setInterval(() => {
-  //     setData(initialData);
+  //     // setData(initialData);
   //     setData((prevData) => {
   //       return prevData.map((i) => ({
   //         ...i,
@@ -64,7 +64,7 @@ const MainPage = () => {
   //         totalJudgeMent: Math.floor(Math.random() * 4),
   //       }));
   //     });
-  //   }, 1000);
+  //   }, 2000);
 
   //   return () => clearInterval(interval);
   // }, [
@@ -96,7 +96,7 @@ const MainPage = () => {
           {/* <p>EOLT Station : AUTO Mode</p> */}
         </div>
 
-        {data.length < 0 && loading === false ? (
+        {data.length > 0 && loading === false ? (
           data.map((i, idx) => (
             <div key={idx} className="container">
               <div className="content px-6 py-6 items-center">
@@ -106,7 +106,7 @@ const MainPage = () => {
                     <span className="text-gray-700">{i?.partNumber}</span>
                   </p>
                   <p className="font-bold text-md mb-2">
-                    Número de caja :{" "}
+                    Número de Caja :{" "}
                     <span className="text-gray-700">{i?.boxNo}</span>
                   </p>
                   <div className="search-card flex flex-between flex-wrap">
@@ -131,8 +131,8 @@ const MainPage = () => {
                         i?.jigDesc === "Jig1"
                           ? "1"
                           : i?.jigDesc === "Jig2"
-                          ? "2"
-                          : "0"
+                            ? "2"
+                            : "0"
                       }
                       disable={true}
                     />
@@ -175,6 +175,7 @@ const MainPage = () => {
                       value={getJudgementText(i?.totalJudgement)}
                       disable={true}
                     />
+
                   </div>
                 </div>
                 {/* <form
