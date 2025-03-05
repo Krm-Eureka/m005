@@ -107,7 +107,6 @@ const columns = [
     w: 150,
     aln: "center",
   },
-
   {
     id: "boxNo",
     label: "Número de Caja",
