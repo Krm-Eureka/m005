@@ -12,10 +12,10 @@ const MainPage = () => {
     return !value
       ? "No_Data"
       : value === 1
-      ? "OK"
-      : value === 2
-      ? "NOK"
-      : "Unknown";
+        ? "OK"
+        : value === 2
+          ? "NOK"
+          : "Unknown";
   };
   // const initialData = useMemo(
   //   () => [
@@ -50,7 +50,7 @@ const MainPage = () => {
   // );
   // useEffect(() => {
   //   const interval = setInterval(() => {
-  //     setData(initialData);
+  //     // setData(initialData);
   //     setData((prevData) => {
   //       return prevData.map((i) => ({
   //         ...i,
@@ -64,7 +64,7 @@ const MainPage = () => {
   //         totalJudgeMent: Math.floor(Math.random() * 4),
   //       }));
   //     });
-  //   }, 1000);
+  //   }, 2000);
 
   //   return () => clearInterval(interval);
   // }, [
@@ -107,9 +107,7 @@ const MainPage = () => {
                   </p>
                   <p className="font-bold text-md mb-2">
                     Número de caja :{" "}
-                    <span className="text-gray-700 mr-4">{i?.boxNo}</span>
-                    Número de palet :{" "}
-                    <span className="text-gray-700 mr-4">{i?.palletNo}</span>
+                    <span className="text-gray-700">{i?.boxNo}</span>
                   </p>
 
                   <div className="search-card flex flex-between flex-wrap">
@@ -134,8 +132,8 @@ const MainPage = () => {
                         i?.jigDesc === "Jig1"
                           ? "1"
                           : i?.jigDesc === "Jig2"
-                          ? "2"
-                          : "0"
+                            ? "2"
+                            : "0"
                       }
                       disable={true}
                     />
@@ -178,6 +176,7 @@ const MainPage = () => {
                       value={getJudgementText(i?.totalJudgement)}
                       disable={true}
                     />
+
                   </div>
                 </div>
                 {/* <form
