@@ -96,7 +96,7 @@ const MainPage = () => {
           {/* <p>EOLT Station : AUTO Mode</p> */}
         </div>
 
-        {data.length < 0 && loading === false ? (
+        {data.length > 0 && loading === false ? (
           data.map((i, idx) => (
             <div key={idx} className="container">
               <div className="content px-6 py-6 items-center">
@@ -107,8 +107,11 @@ const MainPage = () => {
                   </p>
                   <p className="font-bold text-md mb-2">
                     Número de caja :{" "}
-                    <span className="text-gray-700">{i?.boxNo}</span>
+                    <span className="text-gray-700 mr-4">{i?.boxNo}</span>
+                    Número de palet :{" "}
+                    <span className="text-gray-700 mr-4">{i?.palletNo}</span>
                   </p>
+
                   <div className="search-card flex flex-between flex-wrap">
                     <DataBar
                       title="Fecha"
