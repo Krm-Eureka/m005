@@ -107,7 +107,9 @@ const MainPage = () => {
                   </p>
                   <p className="font-bold text-md mb-2">
                     Número de caja :{" "}
-                    <span className="text-gray-700">{i?.boxNo}</span>
+                    <span className="text-gray-700 mr-4">{i?.boxNo}</span>
+                    Número de palet :{" "}
+                    <span className="text-gray-700">{i?.palletNo}</span>
                   </p>
 
                   <div className="search-card flex flex-between flex-wrap">

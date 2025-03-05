@@ -115,19 +115,20 @@ const columns = [
     aln: "center",
   },
   {
-    id: "Create Box",
-    label: "Crear caja",
-    sortable: true,
-    w: 200,
-    aln: "center",
-  },
-  {
-    id: "Box qty",
+    id: "boxQty",
     label: "Cajas Qty.",
     sortable: true,
     w: 200,
     aln: "center",
   },
+  {
+    id: "boxTime",
+    label: "Crear caja",
+    sortable: true,
+    w: 200,
+    aln: "center",
+  },
+
   {
     id: "palletNo",
     label: "Número de Palet",
@@ -143,7 +144,7 @@ const columns = [
     aln: "center",
   },
   {
-    id: "Create Pallet",
+    id: "palletTime",
     label: "Crear Palet",
     sortable: true,
     w: 200,
